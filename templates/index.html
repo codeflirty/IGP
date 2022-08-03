@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Stock Price Prediction</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="{{ url_for('static',filename='styles/mystyle.css') }}">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="http://use.fontawsome.com/releases/v5.0.8/js/all.js"></script>
+	<script src="{{ url_for('static',filename='js/myscript.js') }}"></script>
+
+</head>
+
+<body style="background: url(../static/images/background.png);background-size: cover;">
+	<div class="container mt-5 mb-5">
+		<div class="row">
+
+			<div class="card col-lg-7 text-center" style="background: rgba(0, 0, 0, 0.7);">
+				<h1 class="m-5" style="color:#dac524da"><strong>Stock Price Prediction</strong>
+				</h1>
+				</h4>
+				<p class="m-5" style="color: white;text-align: justify;">There is no magical way to predict the stock market. However, we can predict the share prices by studying the historical trends by selecting the appropriate Machine learning model. The successful prediction of a stock's future price could yield significant profit.
+				</p>
+				<h3 style="color:#dac524da"><strong>Let's Predict!!</strong></h3>
+				<button class="btn btn-secondary" style="width: 200px; margin-left: 50px; margin-top: 40px; margin-bottom: 50px;"
+					data-toggle="modal" data-target="#instructionmodal">Meet Our Team</button>
+			</div>
+
+			<div class="col-lg-5 text-center" style="background: rgb(156, 142, 142,0.7);">
+				<div>
+					<h2 class="m-5" style="color:#f0526c"><strong>Input Attributes</strong></h2>
+				</div>
+
+				<div>
+					<form action="/" method="POST">
+
+						<div class="form-group row">
+							<label class="col-lg-4 col-4 offset-lg-1 col-form-label"
+								style="font-weight:bolder ;font-size: large;">Select Bank</label>
+							<div class="col-lg-6 col-xl-5 col-6">
+								<div class="dropdown">
+									<select class="form-control btn-secondary" name="pclass" id="pclass"
+										style="background-color: rgb(0,0,0,0.5);border-width: 3px;border-color: #f0526c;color: white;height: 40px;"
+										onchange="checkSelection(this)" required>
+										<option selected disabled value="">Select Bank</option>
+										<option value="1">SBIN</option>
+										<option value="2">AXIS</option>
+										<option value="3">HDFC</option>
+										<option value="4">ICICI</option>
+										<option value="5">KOTAK</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-lg-4 col-4 offset-lg-1 col-form-label"
+								style="font-weight:bolder ;font-size: large;">Start Date</label>
+							<div class="col-lg-6 col-xl-5 col-6">
+									<input class="form-control btn-secondary" name="pclass" id="pclass"
+									style="background-color: rgb(0,0,0,0.5);border-width: 3px;border-color: #f0526c;color: white;height: 40px;"
+									onchange="checkSelection(this)" required type="date" id="birthday" name="birthday">
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-lg-4 col-4 offset-lg-1 col-form-label"
+								style="font-weight:bolder ;font-size: large;">End Date</label>
+							<div class="col-lg-6 col-xl-5 col-6">
+									<input class="form-control btn-secondary" name="pclass" id="pclass"
+									style="background-color: rgb(0,0,0,0.5);border-width: 3px;border-color: #f0526c;color: white;height: 40px;"
+									onchange="checkSelection(this)" required type="date" id="birthday2" name="birthday2">
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-lg-4 col-4 offset-lg-1 col-form-label"
+								style="font-weight:bolder ;font-size: large;">Prediction_Model</label>
+							<div class="col-lg-6 col-xl-5 col-6">
+								<div class="dropdown">
+									<select class="form-control btn-secondary" name="gender" id="gender"
+										style="background: rgb(0, 0, 0,0.5);border-width: 3px;border-color: #f0526c;color: white;height: 40px;"
+										onchange="checkSelection(this)" required>
+										<option selected disabled value="">Select Model</option>
+										<option value="0">LSTM</option>
+										<option value="1">Random Foreset</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-lg-4 col-4 offset-lg-1 col-form-label"
+								style="font-weight:bolder ;font-size: large;">Factors</label>
+							<div class="col-lg-6 col-xl-5 col-6">
+								<div class="dropdown">
+									<select class="form-control btn-secondary" name="siblings" id="siblings"
+										style="background: rgb(0, 0, 0,0.5);border-width: 3px;border-color: #f0526c;color: white;height: 40px;"
+										onchange="checkSelection(this)" required>
+										<option selected disabled value="">Select Factor</option>
+										<option value="0">Covid</option>
+										<option value="1">None</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-lg-4 col-4 offset-lg-1 col-form-label"
+								style="font-weight:bolder ;font-size: large;">Forecasting_Days</label>
+							<div class="col-lg-6 col-xl-5 col-6">
+								<div class="dropdown">
+									<select class="form-control btn-secondary" name="embarked" id="embarked"
+										style="background: rgb(0, 0, 0,0.5);border-width: 3px;border-color: #f0526c;color: white;height: 40px;"
+										onchange="checkSelection(this)" required>
+										<option selected disabled value="">Select Days</option>
+										<option value="0">15 Days</option>
+										<option value="1">30 Days</option>
+										<option value="2">60 Days</option>
+									</select>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group row  mt-5">
+							<div class="col-lg-8 offset-lg-2 col-9 offset-1 mb-5">
+								<button type="submit" class="btn btn-primary" id="calculateButton"
+									style="width: 100%;">Predict</button>
+							</div>
+						</div>
+				</div>
+
+			</div>
+
+			<!-- Result Modal -->
+			<div class="modal fade" id="resultmodal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" style="margin-left: 35%;"><strong>Prediction Result</strong></h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body text-center">
+							<button class="btn btn-success" type="button" data-toggle="collapse"
+								data-target=".multi-collapse" aria-expanded="false"
+								aria-controls="multiCollapseExample1 multiCollapseExample2" id="inputhandler">Click to
+								view
+								inputs</button>
+							<div class="row mt-3">
+								<div class="col-6">
+									<div class="collapse multi-collapse" id="multiCollapseExample1">
+										<div class="card">
+											<div class="card-header" style="background-color: #009cff;color: white;">
+												<strong>PClass</strong>
+											</div>
+											<div class="card-body">
+												{{pclass}}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6">
+									<div class="collapse multi-collapse" id="multiCollapseExample2">
+										<div class="card">
+											<div class="card-header" style="background-color: #009cff;color: white;">
+												<strong>Gender</strong>
+											</div>
+											<div class="card-body">
+												{{gender}}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6 mt-2">
+									<div class="collapse multi-collapse" id="multiCollapseExample3">
+										<div class="card">
+											<div class="card-header" style="background-color: #009cff;color: white;">
+												<strong>Siblings</strong>
+											</div>
+											<div class="card-body">
+												{{siblings}}
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-6 mt-2">
+									<div class="collapse multi-collapse" id="multiCollapseExample4">
+										<div class="card">
+											<div class="card-header" style="background-color: #009cff;color: white;">
+												<strong>Embarked</strong>
+											</div>
+											<div class="card-body">
+												{{embarked}}
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="row mt-3 collapse multi-collapse">
+								<i class="fa fa-arrow-down" style="padding-left: 43%;font-size: 70px;"></i>
+							</div>
+
+							<div class="result-box mt-3">
+								<img src="../static/images/S1.png" style="width: 400px;">
+								<p id="result">{{predicted_result}}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Instruction Modal -->
+			<div class="modal fade" id="instructionmodal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" style="margin-left: 35%;"><strong>Meet Our Team</strong>
+							</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="w-100 text-center" style="background:#009cff;color: white;height: 50px;">
+								<h5 style="padding-top: 10px;">Group Members</h5>
+							</div>
+							<div id="accordion">
+								<div class="card mt-2" style="background: rgb(173, 170, 170)">
+									<div class="card-header" id="pclassheading"
+										style="display: inline-flex;height: 40px;align-content: center;cursor: pointer;"
+										data-toggle="collapse" data-target="#pclasscollapse" aria-expanded="false"
+										aria-controls="collapseOne">
+										<i class="fa fa-plus-circle">
+											<b class="ml-3" style="font-family: sans-serif;">Hamza</b>
+										</i>
+									</div>
+
+									<div id="pclasscollapse" class="collapse" aria-labelledby="pclassheading"
+										style="background: white;" data-parent="#accordion">
+										<div class="card-body">
+											Main Responsibility : <b>Model Training and Testing</b>
+											<ul>
+												<li>Phone: <span style="font-weight: bolder;color: #4cad13;">+447464331598</span></li>
+												<li>Email: <span style="font-weight: bolder;color: #009cff;">Hamza2.Safdar@live.uwe.ac.uk</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="card mt-1" style="background: rgb(173, 170, 170)">
+									<div class="card-header" id="genderheading"
+										style="display: inline-flex;height: 40px;align-content: center;cursor: pointer;"
+										data-toggle="collapse" data-target="#gendercollapse" aria-expanded="false"
+										aria-controls="collapseOne">
+										<i class="fa fa-plus-circle">
+											<b class="ml-3" style="font-family: sans-serif;">Lynn</b>
+										</i>
+									</div>
+
+									<div id="gendercollapse" class="collapse" aria-labelledby="genderheading"
+										style="background: white;" data-parent="#accordion">
+										<div class="card-body">
+											Main Responsibility : <b>Strategic Direction</b>
+											<ul>
+												<li>Phone: <span style="font-weight: bolder;color: #4cad13;">+9595193841</span></li>
+												<li>Email: <span style="font-weight: bolder;color: #009cff;">Htet3.Aung@live.uwe.ac.uk</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="card mt-1" style="background: rgb(173, 170, 170)">
+									<div class="card-header" id="siblingsheading"
+										style="display: inline-flex;height: 40px;align-content: center;cursor: pointer;"
+										data-toggle="collapse" data-target="#siblingscollapse" aria-expanded="false"
+										aria-controls="collapseOne">
+										<i class="fa fa-plus-circle">
+											<b class="ml-3" style="font-family: sans-serif;">Jay</b>
+										</i>
+									</div>
+
+									<div id="siblingscollapse" class="collapse" aria-labelledby="siblingsheading"
+										style="background: white;" data-parent="#accordion">
+										<div class="card-body">
+											Main Responsibility : <b>Project Background Research</b>
+											<ul>
+												<li>Phone: <span style="font-weight: bolder;color: #4cad13;">+447516092665</span></li>
+												<li>Email: <span style="font-weight: bolder;color: #009cff;">jiralak2.bunchongruchakul@live.uwe.ac.uk</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+								<div class="card mt-1" style="background: rgb(173, 170, 170)">
+									<div class="card-header" id="embarkedheading"
+										style="display: inline-flex;height: 40px;align-content: center;cursor: pointer;"
+										data-toggle="collapse" data-target="#embarkedcollapse" aria-expanded="false"
+										aria-controls="collapseOne">
+										<i class="fa fa-plus-circle">
+											<b class="ml-3" style="font-family: sans-serif;">Heather</b>
+										</i>
+									</div>
+
+									<div id="embarkedcollapse" class="collapse" aria-labelledby="embarkedheading"
+										style="background: white;" data-parent="#accordion">
+										<div class="card-body">
+											Main Responsibility : <b>Research for Potential Project Extension</b>
+											<ul>
+												<li>Phone: <span style="font-weight: bolder;color: #4cad13;">+447495445060</span></li>
+												<li>Email: <span style="font-weight: bolder;color: #009cff;">mya2.thar@live.uwe.ac.uk</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			$("#result").ready(function () {
+				if ($("#result").text() == "Survived") {
+					document.getElementById("result").innerHTML =
+						'<h1 id = "result" ><strong> Survived </strong></h1> ';
+					$("#result").css("color", "green");
+					document.getElementById("result").style.display = "block";
+				}
+
+				if ($("#result").text() == "Not Survived") {
+					document.getElementById("result").innerHTML =
+						'<h1 id = "result"><strong> Not Survived </strong></h1>';
+					$("#result").css("color", "#f22849");
+					document.getElementById("result").style.display = "block";
+				}
+			})
+		});
+
+		window.onload = function () {
+			if (document.getElementById("result").innerText) {
+				$("#resultmodal").modal("show");
+			}
+		};
+
+		function checkSelection(element) {
+			if (element.value != "") {
+				element.style.borderColor = "green"; //change color to green
+			}
+		}
+
+		function predict() {
+			var pclass = document.getElementById("pclass").value;
+			var gender = document.getElementById("gender").value;
+			var siblings = document.getElementById("siblings").value;
+			var embarked = document.getElementById("embarked").value;
+
+			if (pclass != "" && gender != "" && siblings != "" && embarked != "") {
+
+			}
+		}
+
+		$("#pclassheading").click(function () {
+			if ($("#pclassheading").attr("aria-expanded") == "false") {
+				$("#pclassheading i").removeClass("fa-plus-circle");
+				$("#pclassheading i").addClass("fa-minus-circle");
+			}
+			if ($("#pclassheading").attr("aria-expanded") == "true") {
+				$("#pclassheading i").removeClass("fa-minus-circle");
+				$("#pclassheading i").addClass("fa-plus-circle");
+			}
+		})
+
+		$("#genderheading").click(function () {
+			if ($("#genderheading").attr("aria-expanded") == "false") {
+				$("#genderheading i").removeClass("fa-plus-circle");
+				$("#genderheading i").addClass("fa-minus-circle");
+			}
+			if ($("#genderheading").attr("aria-expanded") == "true") {
+				$("#genderheading i").removeClass("fa-minus-circle");
+				$("#genderheading i").addClass("fa-plus-circle");
+			}
+		})
+
+		$("#siblingsheading").click(function () {
+			if ($("#siblingsheading").attr("aria-expanded") == "false") {
+				$("#siblingsheading i").removeClass("fa-plus-circle");
+				$("#siblingsheading i").addClass("fa-minus-circle");
+			}
+			if ($("#siblingsheading").attr("aria-expanded") == "true") {
+				$("#siblingsheading i").removeClass("fa-minus-circle");
+				$("#siblingsheading i").addClass("fa-plus-circle");
+			}
+		})
+
+		$("#embarkedheading").click(function () {
+			if ($("#embarkedheading").attr("aria-expanded") == "false") {
+				$("#embarkedheading i").removeClass("fa-plus-circle");
+				$("#embarkedheading i").addClass("fa-minus-circle");
+			}
+			if ($("#embarkedheading").attr("aria-expanded") == "true") {
+				$("#embarkedheading i").removeClass("fa-minus-circle");
+				$("#embarkedheading i").addClass("fa-plus-circle");
+			}
+		})
+
+		$("#inputhandler").click(function () {
+			if ($("#inputhandler").attr("aria-expanded") == "false") {
+				document.getElementById("inputhandler").innerText = "Click to minimize inputs";
+				$("#inputhandler").removeClass("btn-success");
+				$("#inputhandler").addClass("btn-secondary");
+			}
+			if ($("#inputhandler").attr("aria-expanded") == "true") {
+				document.getElementById("inputhandler").innerText = "Click to view inputs"
+				$("#inputhandler").removeClass("btn-secondary");
+				$("#inputhandler").addClass("btn-success");
+			}
+		})
+	</script>
+
+</body>
+
+</html>
