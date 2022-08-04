@@ -4,5 +4,4 @@ numpy
 pandas
 prettytable==3.0.0
 scikit_learn
-tensorflow
 yfinance==0.1.63
