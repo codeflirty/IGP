@@ -1,8 +1,8 @@
 Flask==2.0.1
 matplotlib==3.4.3
-numpy==1.21.2
-pandas==1.3.2
+numpy
+pandas
 prettytable==3.0.0
-scikit_learn==1.1.1
-tensorflow==2.6.0
+scikit_learn
+tensorflow
 yfinance==0.1.63
