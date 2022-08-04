@@ -1,5 +1,5 @@
 Flask==2.0.1
-matplotlib==3.4.3
+matplotlib
 numpy
 pandas
 prettytable==3.0.0
