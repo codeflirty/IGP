@@ -53,11 +53,11 @@ def predict():
     data = yf.Ticker(bankt)
     data = data.history(start=date1, end=date2)['Close']
     
-    if(factor=="0"):
-        scaler = MinMaxScaler(feature_range=(0,1))
-        data = scaler.fit_transform(np.array(data).reshape(-1,1))
     if(factor=="1" and len(data)>700 and str(data.index[-1])>'2021-01-01'):
         data = data[:'2019-12-31'].append(data['2021-01-01':])
+        scaler = MinMaxScaler(feature_range=(0,1))
+        data = scaler.fit_transform(np.array(data).reshape(-1,1))
+    else:
         scaler = MinMaxScaler(feature_range=(0,1))
         data = scaler.fit_transform(np.array(data).reshape(-1,1))
     
